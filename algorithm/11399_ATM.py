@@ -1,7 +1,6 @@
 N = int(input())
 nums = list(map(int, input().split()))
 nums.sort()
-print(nums)
 DP = [0] * (N+1)
 DP[1] = nums[0]
 for i in range(2, N+1):
