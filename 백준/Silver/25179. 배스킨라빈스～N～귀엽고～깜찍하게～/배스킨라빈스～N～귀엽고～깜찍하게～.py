@@ -1,6 +1,2 @@
 N, M = map(int, input().split())
-
-if N % (M+1) == 1:
-    print("Can't win")
-else:
-    print("Can win")
+print("Can't win") if N%(M+1)==1 else print("Can win")
