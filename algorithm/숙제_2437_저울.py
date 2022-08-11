@@ -1,31 +1,10 @@
-# 예시를 생각해보자
-# 1, 1, 2, 3, 6, 7, 30 인데
-# 그럼 일단 최대값은
-# sum(list) +1 이라고 생각
-# 그럼 해당 크기의 리스트를 만들어놓고
-# 가능하면 1을 넣는다.
-# 리스트에서 0이 나오는 최초의 인덱스를
-# 반환한다.
-
-# 1의 값을 N-1만큼 곱해서 초기리스트를 설정하고
-# 거기에 각 인덱스별 값을 더해준다.
-# 해당하는 숫자들을 DP에서 1로 바꿔주고
-# 다시 그 리스트의 숫자들에 더해줘야하는데
-# 그럼 리스트[0]의 값은 없애줘야 함
-# 그렇게 쭉 빼면 리스트가 없어짐
-
-# 준수님 아이디어
-# 이전값을 다 더한 게 다음값 이전의 숫자를 모두 채울 수 있게
-# 못 채우면 답이 나올 것
-
 N = int(input())
-nums = list(map(int, input().split()))
-nums.sort()
-total = sum(nums)
-DP = [0] * total+2
-for i in nums:
-    DP[i] = 1
-
-for i in nums:
-    for j in nums:
-        DP[i+j] = 1
+weights = list(map(int, input().split()))
+weights.sort()
+res = 0
+for weight in weights:
+    if res+2 <= weight:
+        break
+    else:
+        res += weight
+print(res+1)
