@@ -14,16 +14,17 @@ while que:
 
     if (cnt % K) == 0:
         b = que.popleft()
-        kill += 1
+
         print(b)
     else:
         a = que.popleft()
         que.append(a)
 
 
-    if kill != 0 and kill % A == 0:
+    if kill != 0 and kill % (A*K) == 0:
         que.reverse()
         print(que)
     cnt += 1
+    kill += 1
 
 
