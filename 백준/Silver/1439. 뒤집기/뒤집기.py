@@ -1,0 +1,6 @@
+N = input()
+res0 = N.split('0')
+res0 = list(filter(None, res0))
+res1 = N.split('1')
+res1 = list(filter(None, res1))
+print(min(len(res0),len(res1)))
