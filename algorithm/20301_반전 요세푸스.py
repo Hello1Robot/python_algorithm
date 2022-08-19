@@ -4,27 +4,19 @@ from collections import deque
 # popleft로 갯수만큼 꺼내고 뒤로 넣기
 # A번째 횟수마다 방향을 바꾸기
 
-N, K, A = map(int, input().split())
+N, K, M = map(int, input().split())
 nums = list(range(1, N+1))
 que = deque(nums)
-cnt = 1
-switch = 1
+flag = 1
 kill = 0
 while que:
-
-    if (cnt % K) == 0:
-        b = que.popleft()
-
-        print(b)
+    que.rotate(-(K))
+    if flag == 1:
+        print(que.pop())
     else:
-        a = que.popleft()
-        que.append(a)
-
-
-    if kill != 0 and kill % (A*K) == 0:
-        que.reverse()
-        print(que)
-    cnt += 1
+        print(que.popleft())
     kill += 1
-
-
+    if kill == M:
+        kill = 0
+        K = K * -1
+        flag = flag * -1
