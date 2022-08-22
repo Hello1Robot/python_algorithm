@@ -1,3 +1,6 @@
+# count를 쓰면 역시나 시간초과
+# N의 최대값이 50만이라서, 좀 무거운듯
+
 N = int(input()) # 받을 숫자 갯수 받아오기
 rst = [int(input()) for _ in range(N)]
 

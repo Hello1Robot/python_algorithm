@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+
 N, M = map(int, input().split())
 # 잘라나가다가, M보다 작아지면 그 이전 값을 출력하자
 woods = list(map(int, input().split()))

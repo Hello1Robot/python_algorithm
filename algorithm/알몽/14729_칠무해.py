@@ -15,7 +15,6 @@ def sorting(A, B):
     rst.extend(B)
     return rst
 
-
 N = int(input())
 nums = [[float(input()) for _ in range(N)]]
 # 생각부터 적자
@@ -30,10 +29,10 @@ while len(nums) < N:
         num_a, num_b = num[0:len(num)//2+1], num[len(num)//2+1:]
     else:
         num_a, num_b = num[0:len(num)//2], num[len(num)//2:]
-        if len(num_a)>0:        
-            nums.append(num_a)
-        if len(num_b)>0:
-            nums.append(num_b)
+    if len(num_a)>0:        
+        nums.append(num_a)
+    if len(num_b)>0:
+        nums.append(num_b)
 # 이러면 각각의 요소들이 리스트 형태로 나뉘어서 들어간다.
 # 길이 절반만큼 반복하면서, len이 1이 될 때까지 반복
 

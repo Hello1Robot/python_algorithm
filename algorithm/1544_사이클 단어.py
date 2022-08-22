@@ -4,7 +4,6 @@ str_set = set()
 str_list = []
 
 for i in range(N):
-    a = set(input())
-    str_list.append(a)
+    a = 
 
 print(str_list)
