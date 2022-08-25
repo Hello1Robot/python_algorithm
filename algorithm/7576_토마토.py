@@ -15,6 +15,10 @@ def bfs(start):
     while que:
         x,y,cnt = que.popleft()
         visited[x][y] = cnt
+        if field[x][y] == 0:
+            field[x][y] = cnt
+        elif field[x][y] > cnt:
+            field[x][y] = cnt
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
@@ -38,7 +42,7 @@ visited = [[0]*M for _ in range(N)]
 for i in range(N):
     for j in range(M):
         if field[i][j] == 1:
-            bfs((i,j,0))
+            bfs((i,j,1))
 
 res = max(visited)
 res2 = max(res)
@@ -48,5 +52,6 @@ for i in range(N):
         if field[i][j] == 0:
             res2 = -1
             break
-print(res2)
+print(field)
+print(visited)
 

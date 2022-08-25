@@ -1,30 +1,38 @@
-def danji(m,n,cnt):
-    field[m][n] = 0
-    cnt += 1
-    x_move = [-1, 1, 0, 0]
-    y_move = [0, 0, -1, 1]
-    for x in range(4):
-        if (m+x_move[x]) >=0 and (m+x_move[x]) < N and (n+y_move[x] >=0) and (n+y_move[x]) < N:
-            new_n = field[m+x_move[x]][n+y_move[x]]
-            if new_n == 1:
-                danji(m+x_move[x],n+y_move[x],cnt)
-                res_list.append(cnt)
-            else:
-                continue
+from collections import deque
+
+def bfs(x,y):
+    cnt = 1
+    que = deque()
+    que.append((x,y))
+    field[x][y] = 0
+    while que:
+        x,y = que.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if 0<=nx<N and 0<=ny<N and field[nx][ny] == 1:
+                field[nx][ny] = 0
+                cnt += 1
+                que.append((nx,ny))
+    return cnt
 
 
+
+dx = [0,0,-1,1]
+dy = [-1,1,0,0]
+
+# bfs 사용하기
 
 N = int(input())
-
-field = [list(map(int, list(input()))) for _ in range(N)]
-res_list = []
+field = [list(map(int,input())) for _ in range(N)]
+bfs_list = []
 res = []
 for i in range(N):
     for j in range(N):
-        if field[i][j] == 0:
-            continue
-        else:
-            res_list.append(danji(i,j,0))
+        if field[i][j] == 1:
+            res.append(bfs(i,j))
 
-print(res_list)
- 
+res.sort()
+print(len(res))
+for danji in res:
+    print(danji)
