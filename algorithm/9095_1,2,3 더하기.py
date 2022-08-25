@@ -1,3 +1,12 @@
-# 일단 아이디어...
-# 아니 근데 너무 순열인데
-# 나 너무 힘들어 수학적인 사고
+# DP문제
+# 동전 1 응애버전
+# 아니네 순열이네...
+T = int(input())
+for _ in range(T):
+    N = int(input())
+    DP = [1] * (N+1)
+    for i in range(2, N+1):
+        DP[i] += DP[i-2]
+    for i in range(3, N+1):
+        DP[i] += DP[i-3]        
+    print(DP[N])
