@@ -1,31 +1,29 @@
-# 우선순위 큐를 쓰는 문제니까
-# 예제에서 시작시간과 종료시간을 오름차순으로 정렬해보자
-# 일단 예제
-# 8
-# 6 15 21
-# 7 20 25
-# 1 3 8
-# 3 2 14
-# 8 6 27
-# 2 7 13
-# 4 12 18
-# 5 6 20
+import sys
+import heapq
+input = sys.stdin.readline
 
-# 앞의 숫자는 안쓰니까 일단 시작과 종료시간만을 정렬하면
+N = int(input())
+start_list = []
+end_list = []
+for _ in range(N):
+    num, stt, end = map(int,input().split())
+    start_list.append(stt)
+    end_list.append(end)
+heapq.heapify(start_list)
+heapq.heapify(end_list)
+max_len = 0
+que = []
+while start_list:
+    a = start_list[0]
+    b = end_list[0]
+    
+    if a < b:
+        que.append(heapq.heappop(start_list))
+        if len(que) > max_len:
+            max_len = len(que)
+    else:
+        heapq.heappop(end_list)
+        que.pop()
 
-# 2 14
-# 3 8
-# 6 20
-# 6 27
-# 7 13
-# 12 18
-# 15 21
-# 20 25
-
-# 처음 2-14. 14부터 다시 탐색하면 15-21. 21부터 탐색하면 0. 강의실카운트 += 1
-# 그 다음거 팝. 3-8. 8부터 다시 탐색. 12-18. 18부터 탐색. 강의실 카운트 += 1
-# 그 다음거 팝. 6-20. 20부터 탐색. 20-25. 강의실 카운트 += 1
-# 그 다음거 팝. 6-27. 27이후 없음. 강의실 카운트 += 1
-# 그 다음거 팝. 7-13. 뒤에숫자들은 이미 다 팝 됐음. 강의실 카운트 += 1
-# 이렇게 해서 강의실 5개.
-# 근데 우선순위 큐를 써서, 어떻게 범위 설정할건지 모르겠음.
+print(max_len)
+        
