@@ -17,24 +17,30 @@ que = deque()
 for i in range(N):
     for j in range(M):
         if field[i][j] == 1:
-            que.append((i,j,0))
+            que.append((i,j))
 res = 0
+cnt = 0
 while que:
-    x,y,cnt = que.popleft()
-    field[x][y] = 1
+    x,y = que.popleft()
     for i in range(4):
         nx = x + dx[i]
         ny = y + dy[i]
         # 범위 안이고, field가 0일 때
         if nx < 0 or nx >= N or ny < 0 or ny >= M:
-            break
-        if field[nx][ny] ==0:
-            que.append((nx,ny,cnt+1))
-    res = cnt
+            continue
+        if field[nx][ny] == 0:
+            field[nx][ny] = field[x][y] + 1
+            que.append((nx,ny))
 
+
+
+days = 0
 for i in range(N):
     for j in range(M):
+        if field[i][j] > days:
+            days = field[i][j]
         if field[i][j] == 0:
             print(-1)
             exit()
-print(res)
+        
+print(days-1)

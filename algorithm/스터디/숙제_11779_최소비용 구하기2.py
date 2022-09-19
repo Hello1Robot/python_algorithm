@@ -1,3 +1,4 @@
+# 7퍼 컷
 import sys
 import heapq
 input = sys.stdin.readline
@@ -7,6 +8,7 @@ def 다익스트라(start):
     # 시작 노드는 거리 0
     heapq.heappush(que, (0,start))
     distance[start] = 0
+    visited[start] = [start]
     while que:
         # 최단거리 정보 꺼내기
         dis, now = heapq.heappop(que)
@@ -19,7 +21,7 @@ def 다익스트라(start):
             # 기존 거리보다 짧은 경우
             if cost < distance[node]:
                 distance[node] = cost
-                visited[node].append(now)
+                visited[node] = visited[now] + [node]
                 heapq.heappush(que, (cost, node))
 
 INF = 1000000000
@@ -35,6 +37,5 @@ for _ in range(M):
 start, end = map(int,input().split())
 다익스트라(start)
 print(distance[end])
-visited[end].append(end)
 print(len(visited[end]))
 print(*visited[end])

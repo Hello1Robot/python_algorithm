@@ -21,7 +21,7 @@ def 다익스트라(start):
                 distance[node] = cost
                 heapq.heappush(que, (cost, node))
 
-INF = int(1000000000)
+INF = 1000000000
 N = int(input()) # 도시의 개수 입력받기
 M = int(input()) # 간선의 개수 입력받기
 field = [[] for i in range(N+1)]

@@ -1,4 +1,3 @@
-# DP와 visited를 만들어서 채워넣자
 N, K = map(int,input().split())
 DP = list(range(N+1))
 visited = [0]*(N+1)
