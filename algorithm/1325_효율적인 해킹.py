@@ -8,6 +8,7 @@ def bfs(x,y):
     que.append((x,y))
     while que:
         x,y = que.popleft()
+        for
         
 
 dx = [1,0,-1,0]
