@@ -6,7 +6,7 @@ N = int(input())
 start_list = []
 end_list = []
 for _ in range(N):
-    num, stt, end = map(int,input().split())
+    stt, end = map(int,input().split())
     start_list.append(stt)
     end_list.append(end)
 heapq.heapify(start_list)
