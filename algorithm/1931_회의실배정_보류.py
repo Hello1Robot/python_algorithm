@@ -1,29 +1,12 @@
-# 문제분석부터 시작
-# 회의실을 최대한 많이 사용할 수 있도록
-# 회의의 수로 시작
-# 시작시간과 끝 시간 줌
-# 그럼 시작시간을 중심으로 해서 정렬
-# 끝-시작 이 적은 것 = 더 좋은 회의
-# 끝-시작이 0이면 시작하자마자 끝나는 것
-# 그래서 숫자의 차이를 비교해보면서
-# 1.갭이 같으면 시작시간이 빠른 회의를 들어가는 걸로
-# 2.시작시간의 차이보다 갭의 차이가 더 크면, 
-# 시작시간이 늦어도 갭이 적은 것으로 선택
-# 즉 시작-끝-갭 세 가지 요소인데, 
-# 선택한 이후에는 끝나는 이후에 있는 회의끼리 비교
-# 탐색 범위는 끝나는 시간 이내. 만약 (0,13)같은 이상한 좌표가 있으면,
-# 그 중 갭(소요시간)이 제일 적고 시작이 빠른 아이로 갈 것
-
-# 탐색방법 정리하면
-# 1. 일단 값을 저장하고, 시작시간을 기준으로 sort()
-# 그런 다음 각각 값의 소요시간을 계산하기
-# 소요시간과 시작타임을 토대로 회의 선택
-# 선택된 회의값 +하기
+import sys
+import heapq
+input = sys.stdin.readline
 N = int(input())
 meeting = []
 for i in range(N):
     A, B = map(int, input().split())
-    meeting.append([A, B, (B-A)])
-meeting.sort(key=lambda x:x[0])
-for n in meeting:
-    pass
+    heapq.heappush(meeting, (B,A))
+cnt = 1
+while meeting:
+    end, start = heapq.heappop()
+    
