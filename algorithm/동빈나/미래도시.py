@@ -14,7 +14,7 @@ for i in range(1, N+1):
 
 for _ in range(M):
     # A와 B 사이의 양방향 그래프
-    # 각 이동비요은 1
+    # 각 이동비용은 1
     a, b = map(int,input().split())
     graph[a][b] = 1
     graph[b][a] = 1
