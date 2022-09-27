@@ -1,8 +1,6 @@
-
-
 def solution(n, s, a, b, fares):
-    answer = 0
-    field = [[10000000]*(n+1) for _ in range(n+1)]
+    answer = 1000000000
+    field = [[1000000000]*(n+1) for _ in range(n+1)]
 
     for i in range(1, n+1):
         for j in range(1, n+1):
@@ -20,9 +18,10 @@ def solution(n, s, a, b, fares):
                 # 그냥 a에서 b로 가는 것과 a에서 k를 경유해서 b로 가는 것 비교
                 # 만약 가지 못할경우 값이 무한대이므로 넘어갈 것
                 field[x][y] = min(field[x][y], field[x][k] + field[k][y])
-
-    answer = min(field[s][a]+field[a][b], field[s][a]+field[s][b], field[s][b]+field[b][a])
-
+    for i in range(1,n+1):
+        cost = field[s][i] + field[i][a] + field[i][b]
+        if cost < answer:
+            answer = cost
 
     return answer
 
