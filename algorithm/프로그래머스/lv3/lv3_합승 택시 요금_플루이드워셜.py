@@ -1,24 +1,23 @@
 def solution(n, s, a, b, fares):
-    answer = 1000000000
-    field = [[1000000000]*(n+1) for _ in range(n+1)]
+    answer = 1000000000 # 정답으로 할 초기값. 최소값 구해야 되니까 걍 큰 값 집어넣어줌
+    field = [[1000000000]*(n+1) for _ in range(n+1)] # field 설정. 여기도 초기값 큰값으로 잡아줌
 
     for i in range(1, n+1):
-        for j in range(1, n+1):
-            if i == j:
-                field[i][j] = 0
+        field[i][i] = 0 # 같은 열 0으로 초기화
 
-    for fare in fares:
+    for fare in fares:  # 무방향그래프이므로 양쪽에 값 채워줌
         stt, end, cost = fare
         field[stt][end] = cost
         field[end][stt] = cost
 
-    for k in range(1, n+1): # 경유지
+    # 플루이드-워셜 사용. O(n^3)
+    for k in range(1, n+1): # 경유지.
         for x in range(1, n+1):
             for y in range(1, n+1):
                 # 그냥 a에서 b로 가는 것과 a에서 k를 경유해서 b로 가는 것 비교
                 # 만약 가지 못할경우 값이 무한대이므로 넘어갈 것
                 field[x][y] = min(field[x][y], field[x][k] + field[k][y])
-    for i in range(1,n+1):
+    for i in range(1,n+1): # 어디서 갈라져서 가는 게 효율적인지 모르므로, for 문으로 돌면서 최소값 찾기
         cost = field[s][i] + field[i][a] + field[i][b]
         if cost < answer:
             answer = cost
