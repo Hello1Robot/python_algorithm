@@ -1,14 +1,18 @@
-def DFS(x=0,y=0):
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(15000)
+
+def DFS(x,y):
     global cnt
-    if x == N-1 and y == M-1:
+    if x == 0 and y == 0:
         cnt += 1
-        return
+        return False
     for i in range(4):
         nx = x + dx[i]
         ny = y + dy[i]
         if nx >= N or nx < 0 or ny >= M or ny < 0:
             continue
-        if field[nx][ny] < field[x][y]:
+        if field[nx][ny] > field[x][y]:
             visited[nx][ny] = 1
             DFS(nx,ny)
             visited[nx][ny] = 0
@@ -19,6 +23,6 @@ dy = [0,1,0,-1]
 cnt = 0
 field = [list(map(int,input().split())) for _ in range(N)]
 visited = [[0]*M for _ in range(N)]
-visited[0][0] = 1
-DFS()
+visited[N-1][M-1] = 1
+DFS(N-1, M-1)
 print(cnt)
