@@ -9,13 +9,13 @@ def 다익스트라(start):
     distance[start] = 0
     while que:
         # 최단거리 정보 꺼내기
-        dis, now = heapq.heappop(que)
+        비용, 출발지 = heapq.heappop(que)
         # 방문한 노드면 무시
-        if distance[now] < dis:
+        if distance[출발지] < 비용:
             continue # visited와 동일한 역할
         # 현재 노드와 연결된 다른 인접한 노드들을 확인
-        for node, cst in field[now]:
-            cost = dis + cst
+        for node, cst in field[출발지]:
+            cost = 비용 + cst
             # 기존 거리보다 짧은 경우
             if cost < distance[node]:
                 distance[node] = cost
