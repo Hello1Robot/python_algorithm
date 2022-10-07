@@ -9,14 +9,17 @@ nums = list(range(1, N+1))
 que = deque(nums)
 flag = 1
 kill = 0
+rst=[]
 while que:
     que.rotate(-(K))
     if flag == 1:
-        print(que.pop())
+        rst.append(que.pop())
     else:
-        print(que.popleft())
+        rst.append(que.popleft())
     kill += 1
     if kill == M:
         kill = 0
         K = K * -1
         flag = flag * -1
+
+print(*rst)
