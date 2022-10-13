@@ -21,7 +21,7 @@ def 아기상어뚜루뚜뚜뚜(i,j):
     global baby_shark_cnt
     global shark_feed_cnt
     global move_cnt
-
+    res_list = []
     que = deque()
     que.append((i,j))
     visited = [[0]*N for _ in range(N)]
@@ -36,20 +36,30 @@ def 아기상어뚜루뚜뚜뚜(i,j):
             if not visited[nx][ny] and field[nx][ny] <= baby_shark_cnt:
                 visited[nx][ny] = visited[x][y] + 1
                 if 0 < field[nx][ny] < baby_shark_cnt:
-                    move_cnt += visited[x][y]
-                    shark_feed_cnt += 1
-                    field[nx][ny] = 0
-                    field[i][j] = 0
-                    if shark_feed_cnt == baby_shark_cnt:
-                        baby_shark_cnt += 1
-                        shark_feed_cnt = 0
+                    # move_cnt += visited[x][y]
+                    # shark_feed_cnt += 1
+                    # field[nx][ny] = 0
+                    # field[i][j] = 0
+                    # if shark_feed_cnt == baby_shark_cnt:
+                    #     baby_shark_cnt += 1
+                    #     shark_feed_cnt = 0
 
-                    print((nx, ny))
-                    return nx, ny
+                    res_list.append((visited[x][y], nx, ny))
                 else:
                     que.append((nx,ny))
-
-    return i,j
+    if res_list:
+        res_list.sort()
+        move, nx, ny = res_list[0]
+        move_cnt += move
+        shark_feed_cnt += 1
+        field[nx][ny] = 0
+        field[i][j] = 0
+        if shark_feed_cnt == baby_shark_cnt:
+            baby_shark_cnt += 1
+            shark_feed_cnt = 0
+        return nx, ny
+    else:
+        return i,j
 
 
 dx = [-1,0,0,1]
