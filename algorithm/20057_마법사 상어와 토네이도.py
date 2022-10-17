@@ -4,7 +4,6 @@
 # 1 1 2 2 3 3 4 4 ... 순으로 움직임
 # cnt 와 max_length 올리면서 flag로 켰다껐다 하면 될듯?
 # 방향 설정하고 - 방향에 따라서 영향받는 필드 설정하고 - 필드 방향 휙휙 돌리고 - 만약 범위 벗어나면 그만큼 모래 사라지게 만들고 뭐 이런 순서?
-# 
 
 N = int(input())
 field = [list(map(int,input().split())) for _ in range(N)]

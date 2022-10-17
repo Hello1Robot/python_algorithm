@@ -35,10 +35,10 @@ for _ in range(K):
     field[bb][aa] = 0
 
 for i in range(1,N+1):
-    for j in range(1,N+1):
-        if i == j:
-            field[i][j] = 0
-            continue
+    field[i][i] = 0
+
+for i in range(1,N+1):
+    for j in range(1+i,N+1):
         if field[i][j] == INF:
             ax, ay = gens[i][0]
             bx, by = gens[j][0]
@@ -46,9 +46,7 @@ for i in range(1,N+1):
             if gap <= lim:
                 field[i][j] = gap
                 field[j][i] = gap
-            else:
-                field[i][j] = INF+1
-                field[j][i] = INF+1
+
 
 def dijkstra(start):
     que = []

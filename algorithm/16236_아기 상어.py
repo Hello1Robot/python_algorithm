@@ -43,10 +43,13 @@ def 아기상어뚜루뚜뚜뚜(i,j):
                     # if shark_feed_cnt == baby_shark_cnt:
                     #     baby_shark_cnt += 1
                     #     shark_feed_cnt = 0
-
                     res_list.append((visited[x][y], nx, ny))
                 else:
-                    que.append((nx,ny))
+                    if res_list:
+                        visited[x][y] >= res_list[0][0]
+                        continue
+                    else:
+                        que.append((nx,ny))
     if res_list:
         res_list.sort()
         move, nx, ny = res_list[0]
