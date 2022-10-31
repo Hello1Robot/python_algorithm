@@ -12,32 +12,34 @@ def solution(n, paths, gates, summits):
     summit_num = 50001
     que = []
     field = [[] for _ in range(n+1)]
+    visited = [0] * (n+1)
     for a, b, c in paths: # 양방향이니 양쪽에 넣기
         field[a].append((b,c))
         field[b].append((a,c))
 
     for gate in gates: # 게이트 전부 힙큐에 넣고 돌리기
-        st = str(gate).zfill(5)
-        que.append((0, gate, st))
-    flag = 0 # 정상도달플래그
-    
+        visited[gate] = 1
+        heapq.heappush(que, (0, gate))
+    summits = set(summits)
     while que:
-        cost, start, vis = heapq.heappop(que)
-        if flag:
-            if cost > max_intensity:
-                break
+        cost, start = heapq.heappop(que)
+        if cost > max_intensity:
+            continue
         if start in summits:
-            flag = 1
-            max_intensity = cost
-            if start < summit_num:
+            if cost == max_intensity:
+                if summit_num > start:
+                    summit_num = start
+            else:
+                max_intensity = cost
                 summit_num = start
             continue
 
         for x, y in field[start]:
-
-            v = str(x).zfill(5)
-            if v not in vis:
-                heapq.heappush(que, (max(y,cost), x, vis+v))
+            if x in gates:
+                continue
+            if not visited[x]:
+                visited[x] = 1
+                heapq.heappush(que, (max(y,cost), x))
     
 
     
