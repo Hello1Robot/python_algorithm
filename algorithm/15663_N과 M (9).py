@@ -1,20 +1,20 @@
-def 순열(i,n,k):
-    if i == k:
-        if p not in res_list:
-            res_list.append(p[:])
-            print(*p)
+def DFS(i,n,st):
+    if i == n:
+        res_set.add(st[:-1])
     else:
-        for j in range(n):
-            if not used[j]:
-                used[j] = 1
-                p[i] = a[j]
-                순열(i+1,n,k)
-                used[j] = 0
+        for x in range(N):
+            if visited[x] == 0:
+                visited[x] = 1
+                DFS(i+1, n, st+str(nums[x])+' ')
+                visited[x] = 0
 
-N, K = map(int,input().split())
-a = list(map(int,input().split()))
-a.sort()
-used = [0]*N
-p = [0]*K
-res_list = []
-순열(0,N,K)
+
+N, M = map(int,input().split())
+nums = list(map(int,input().split()))
+visited = [0]*N
+nums.sort()
+res_set = set()
+DFS(0,M,'')
+res_list = list(res_set)
+for res in res_list:
+    print(res)
