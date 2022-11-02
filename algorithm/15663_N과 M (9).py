@@ -1,11 +1,13 @@
-def DFS(i,n,st):
+def DFS(i,n):
     if i == n:
-        res_set.add(st[:-1])
+        res_set.add(tuple(rst[:]))
     else:
         for x in range(N):
             if visited[x] == 0:
                 visited[x] = 1
-                DFS(i+1, n, st+str(nums[x])+' ')
+                rst.append(nums[x])
+                DFS(i+1, n)
+                rst.pop()
                 visited[x] = 0
 
 
@@ -14,7 +16,9 @@ nums = list(map(int,input().split()))
 visited = [0]*N
 nums.sort()
 res_set = set()
-DFS(0,M,'')
+rst = []
+DFS(0,M)
 res_list = list(res_set)
+res_list.sort()
 for res in res_list:
-    print(res)
+    print(*res)

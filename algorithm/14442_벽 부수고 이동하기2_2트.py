@@ -15,18 +15,17 @@ def 벽여러개부수기(x,y,w):
             nx = x + dx[i]
             ny = y + dy[i]
 
-            if nx >= N or nx < 0 or ny >= M or ny < 0 or visited[nx][ny][w] != 0:
-                continue
+            # if nx >= N or nx < 0 or ny >= M or ny < 0:
+            #     continue
+            if nx < N and nx >= 0 and ny < M and ny >= 0 and visited[nx][ny][w] == 0:
 
-            # if nx < N and nx >= 0 and ny < M and ny >= 0 and visited[nx][ny][w] == 0:
+                if field[nx][ny] == '0':
+                    visited[nx][ny][w] = visited[x][y][w] + 1
+                    que.append((nx,ny,w))
 
-
-            if w < K and field[nx][ny] == '1':
-                visited[nx][ny][w+1] = visited[x][y][w] + 1
-                que.append((nx,ny,w+1))
-            elif field[nx][ny] == '0':
-                visited[nx][ny][w] = visited[x][y][w] + 1
-                que.append((nx,ny,w))
+                elif w < K and field[nx][ny] == '1':
+                    visited[nx][ny][w+1] = visited[x][y][w] + 1
+                    que.append((nx,ny,w+1))
     return -1
     
 dx = [1,0,0,-1]
