@@ -40,6 +40,7 @@ while sp < ep:
     if dolls[sp] == 1:
         total_ryan -= 1
         pre_start = sp
+        ep = pre_end
 
     if total_ryan == K:
         print(pre_end-pre_start)
@@ -48,6 +49,7 @@ while sp < ep:
     if dolls[ep] == 1:
         total_ryan -= 1
         pre_end = ep
+        sp = pre_start
     if total_ryan == K:
         print(pre_end-pre_start)
         exit()
