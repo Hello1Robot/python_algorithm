@@ -1,8 +1,18 @@
 from sys import stdin; input=stdin.readline
 
 def LIS(rst):
-    DP = [1] * ((N-1)*2)+2
-    for i in range(1,)
+    global res
+    DP = [1] * (ms+1)
+    for i in range(1,ms+1):
+        for j in range(0,i):
+            if rst[i] > rst[j]:
+                DP[i] = max(DP[j]+1, DP[i])
+    x = max(DP)
+    if x > res:
+        res = x
+    return
+
+
 def DFS(x, y, cnt):
     if cnt > (N-1)*2:
         return
@@ -28,5 +38,8 @@ N = int(input())
 field = [tuple(map(int,input().split())) for _ in range(N)]
 visited = [[0]*N for _ in range(N)]
 route = [field[0][0]]
+ms = ((N-1)*2)+1
+res = 0
 DFS(0, 0, 0)
+print(res)
 
