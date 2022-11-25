@@ -1,5 +1,3 @@
-
-
 from sys import stdin; input=stdin.readline
 from collections import deque
 N, M = map(int,input().split())
