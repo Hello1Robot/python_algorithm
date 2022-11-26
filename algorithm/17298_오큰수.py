@@ -14,3 +14,5 @@ while que:
     while que:
         if que[0] <= stk[-1]:
             stk.append(que.popleft())
+        else:
+            

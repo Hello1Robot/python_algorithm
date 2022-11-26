@@ -1,7 +1,35 @@
-# 우선순위를 정해서 DFS를 하는 것으로 생각했는데
-# 왜 DFS가 태그에 없지...?
+from sys import stdin; input = stdin.readline
+from collections import deque
 
-# 비용이 지정되는데, 비용이 낮다 = 우선순위가 높다 라고 생각하면 될 듯
-# 그래서 시작도 할 수 있는 가장 낮은 건물부터 짓기.
-# 앞 라인에 없다 = 못짓는다.
-# 밸류값을 같이 묶어주고 sort
+T = int(input())
+for _ in range(T):
+    N, K = map(int,input().split())
+    times = tuple(map(int,input().split())) # 짓는 데 필요한 시간
+    tot_times = [0]*(N+1) # 이전 것까지 포함해서 걸린 시간
+    needs = [0]*(N+1) # 짓기 위해 필요한 건물 수
+    nodes = {i:[] for i in range(1,N+1)}
+    for _ in range(K):
+        a, b = map(int,input().split())
+        nodes[a].append(b)
+        needs[b] += 1
+    
+    last = int(input())
+    
+    que = deque()
+    for i in range(1,N+1):
+        if needs[i] == 0:
+            que.append(i)
+            tot_times[i] = times[i-1]
+    
+    while que:
+        start = que.popleft()
+        pre_time = tot_times[start]
+        if start == last:
+            print(pre_time)
+            break
+        for x in nodes[start]:
+            next_time = pre_time + times[x-1]
+            tot_times[x] = max(tot_times[x], next_time)
+            needs[x] -= 1
+            if needs[x] == 0:
+                que.append(x)

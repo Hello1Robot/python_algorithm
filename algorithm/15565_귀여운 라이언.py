@@ -4,6 +4,7 @@
 # 1의 갯수와 2의 갯수를 세 놓는 게 좋을까?
 # 근데 1의 갯수를 세려면 어차피 1번 순회해야 되지 않나
 # 1000000개를 한번 돌아야되네
+
 from sys import stdin; input=stdin.readline
 
 N, K = map(int,input().split())
