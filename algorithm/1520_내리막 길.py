@@ -4,7 +4,7 @@ sys.setrecursionlimit(15000)
 
 def DFS(x,y):
     global cnt
-    if x == 0 and y == 0:
+    if x == N-1 and y == M-1:
         cnt += 1
         return False
     for i in range(4):
@@ -18,11 +18,11 @@ def DFS(x,y):
             visited[nx][ny] = 0
 
 N, M = map(int,input().split())
-dx = [1,0,-1,0]
-dy = [0,1,0,-1]
+dx = (1,0,-1,0)
+dy = (0,1,0,-1)
 cnt = 0
-field = [list(map(int,input().split())) for _ in range(N)]
+field = [tuple(map(int,input().split())) for _ in range(N)]
 visited = [[0]*M for _ in range(N)]
-visited[N-1][M-1] = 1
-DFS(N-1, M-1)
+visited[0][0] = 1
+DFS(0, 0)
 print(cnt)
