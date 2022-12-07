@@ -24,5 +24,5 @@ while K > 0:
     stk.pop()
     K -= 1
 
-print(int(''.join(stk)))
+print(''.join(stk))
 
