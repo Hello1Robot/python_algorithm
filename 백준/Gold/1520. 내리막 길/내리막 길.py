@@ -1,6 +1,5 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(15000)
 
 def DFS(x,y):
     global cnt
