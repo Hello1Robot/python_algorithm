@@ -18,8 +18,7 @@ def solution(flowers):
         if tot[i] == 0:
             zero_cnt += 1
     
-    print(tot)
     
-    answer = 366-zero_cnt
+    answer = 365-zero_cnt
 
     return answer

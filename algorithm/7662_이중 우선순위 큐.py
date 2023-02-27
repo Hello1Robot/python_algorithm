@@ -1,61 +1,63 @@
 # 힙큐를 이용하는데
 # 최소값과 최대값 꺼내는 문제
-# cnt를 이용해서 최대값은 킵해뒀다가
-# 없애는 걸로 구현하기로 함
 
-# 이중으로 했을 때 반례
-# 1
-# 7
-# I 10
-# I 20
-# D 1
-# I 30
-# I 40
-# D -1
-# D -1
-# 40 30
-# 이거 일단 해결 못해서 보류
 
-import sys
+from sys import stdin; input = stdin.readline
 import heapq
-input = sys.stdin.readline
 
 T = int(input())
 for _ in range(T):
     N = int(input())
     # I는 삽입, D는 출력.
     # D가 -1일 때는 최솟값, 1일 때는 최대값
-    # 근데 생각해보니까
-    # 힙큐 이거...
-    # 마지막 수가 최대값인 걸 보장 못해주지 않나?
-    # 한번 해봐
+
+    idx = 0
     doublemin = []
     doublemax = []
+    popindex = {}
     cnt = 0
-    for i in range(N):
+    for _ in range(N):
         cmd, val = input().split()
         val = int(val)
+
         if cmd == 'I':
-            heapq.heappush(doublemin, val)
-            heapq.heappush(doublemax, (-val, val))
+            heapq.heappush(doublemin, (val, idx))
+            heapq.heappush(doublemax, (-val, idx))
+            idx += 1
             cnt += 1
         else:
             if val == -1:
                 if cnt > 0:
                     cnt -= 1
-                    heapq.heappop(doublemin)
-                    if cnt == 0:
-                        doublemax.clear()
+                    while doublemin:
+                        a, b = heapq.heappop(doublemin)
+                        if b not in popindex:
+                            popindex[b] = 1
+                            break
+                    
+
+
             else:
                 if cnt > 0:
                     cnt -= 1
-                    heapq.heappop(doublemax)
-                    if cnt == 0:
-                        doublemin.clear()
+                    while doublemax:
+                        a, b = heapq.heappop(doublemax)
+                        if b not in popindex:
+                            popindex[b] = 1
+                            break
+
+
     if cnt > 0:
-        print(heapq.heappop(doublemax)[1], heapq.heappop(doublemin))
+        while True:
+            if doublemax[0][1] not in popindex:
+                break
+            heapq.heappop(doublemax)
+            
+        while True:
+            if doublemin[0][1] not in popindex:
+                break
+            heapq.heappop(doublemin)
+
+        print(-(heapq.heappop(doublemax)[0]), heapq.heappop(doublemin)[0])
     else:
         print('EMPTY')
-                    
-                
-                
