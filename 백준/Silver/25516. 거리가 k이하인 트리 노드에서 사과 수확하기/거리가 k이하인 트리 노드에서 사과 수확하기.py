@@ -5,13 +5,10 @@ nodes = [[] for _ in range(N)]
 for _ in range(N-1):
     a,b = map(int,input().split())
     nodes[a].append(b)
-    nodes[b].append(a)
 
 apples = list(map(int,input().split()))
 visited = [1] + [0]*(N+1)
-res = 0
-if apples[0]:
-    res += 1
+res = apples[0]
 que = [(0,0)]
 while que:
     cnt, nd = heapq.heappop(que)
