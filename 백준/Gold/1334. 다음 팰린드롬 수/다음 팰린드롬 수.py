@@ -4,7 +4,6 @@
 # 리스트로 받는 방법을 생각
 # 첫번째와 1의 자리를 비교한다.
 # 첫번째보다 1의 자리가 더 작을 경우 : 자릿수 맞추기.
-# 아 자릿수 벗어나는 경우가 없을듯? 흠
 
 start = list(map(int, str(int(input()) + 1)))
 
@@ -24,7 +23,7 @@ for _ in range(len(start)):
             start[end-1] += 1
 
             if start[end-1] > 9:
-                for j in range(len(start)-1, 0, -1):
+                for j in range((len(start)-1)+ end , 0, -1):
                     if start[j] > 9:
                         start[j] = 0
                         start[j-1] += 1
