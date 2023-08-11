@@ -1,22 +1,39 @@
-import sys
-from collections import deque
-input = sys.stdin.readline
+from sys import stdin; input = stdin.readline
+from collections import defaultdict, deque
 
-def bfs(x,y):
-    visited = [0]*(N+1)
+def BFS(x):
+    visited = [0]*(n+1)
     que = deque()
-    que.append((x,y))
+    visited[x] = 1
+    que.append(x)
+    cnt = 1
     while que:
-        x,y = que.popleft()
-        for
-        
+        start = que.popleft()
+        for node in tree[start]:
+            if not visited[node]:
+                visited[node] = 1
+                cnt += 1
+                que.append(node)
+    return cnt
+                
 
-dx = [1,0,-1,0]
-dy = [0,-1,0,1]
-N, M = map(int,input().split()) # N은 노드의 수, M은 연결관계의 수
-field = [[0]*(N+1) for _ in range(N+1)]
-for _ in range(M):
-    a,b = map(int,input().split())
-    field[a][b] = 1
-    field[b][a] = 1
+n, m = map(int,input().split())
+tree = defaultdict(list)
+result_list = [0]*(n+1)
+max_result = -1
+max_list = []
+for _ in range(m):
+    a, b = map(int,input().split())
+    tree[b].append(a)
 
+for i in range(1,n+1):
+    result_list[i] = BFS(i)
+    if result_list[i] > max_result:
+        max_result = result_list[i]
+        max_list.clear()
+        max_list.append(i)
+    elif result_list[i] == max_result:
+        max_list.append(i)
+
+max_list.sort()
+print(*max_list)

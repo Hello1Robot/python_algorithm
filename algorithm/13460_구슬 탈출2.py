@@ -29,7 +29,7 @@ for i in range(N):
             end_x = i
             end_y = j
 que = deque()
-res = 0
+res = -1
 visited = []
 for i in range(4):
     que.append((red_x, red_y, blue_x, blue_y, i, 0)) # 처음에는 네 방향 모두 탐색
